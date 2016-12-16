@@ -1,0 +1,29 @@
+config("vstl_config") {
+  include_dirs = [ "include" ]
+}
+
+source_set("vstl") {
+  sources = [
+    "src/string.cpp",
+    "src/string_view.cpp",
+  ]
+
+  public_configs = [ ":vstl_config" ]
+  public_deps = [
+    "$external/boost/libs/container",
+  ]
+}
+
+executable("vstl_unittests") {
+  testonly = true
+
+  sources = [
+    "test/string_view.cpp",
+  ]
+
+  deps = [
+    ":vstl",
+    "$external/googletest",
+    "$external/googletest/googletest:googletest_main",
+  ]
+}
