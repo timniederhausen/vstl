@@ -39,6 +39,11 @@ using boost::container::pmr::basic_string;
 using boost::container::pmr::string;
 using boost::container::pmr::wstring;
 
+inline void assign(vstd::string& dst, const std::string& src)
+{
+  dst.assign(src.data(), src.size());
+}
+
 VSTL_NS_END
 
 namespace std
