@@ -4,6 +4,14 @@ config("vstl_config") {
 
 source_set("vstl") {
   sources = [
+    "include/vstl/detail/config.hpp",
+    "include/vstl/iterator/size.hpp",
+    "include/vstl/string.hpp",
+    "include/vstl/string_fwd.hpp",
+    "include/vstl/string_view.hpp",
+    "include/vstl/string_view_fwd.hpp",
+    "include/vstl/utility/round.hpp",
+    "include/vstl/vector.hpp",
     "src/string.cpp",
     "src/string_view.cpp",
   ]
