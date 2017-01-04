@@ -8,47 +8,48 @@
 
 #include <vstl/string_view.hpp>
 
-#include <gtest/gtest.h>
+#include <boost/test/unit_test.hpp>
 
-VSTL_NS_BEGIN
+BOOST_AUTO_TEST_SUITE(vstl_string_view)
 
-TEST(StringView, Ctor)
+BOOST_AUTO_TEST_CASE(constructor)
 {
   const vstd::string_view v1{};
-  EXPECT_EQ(v1.size(), 0);
-  EXPECT_EQ(v1.data(), nullptr);
-  EXPECT_EQ(v1.empty(), true);
+  BOOST_CHECK(v1.size() == 0);
+  BOOST_CHECK(v1.data() == nullptr);
+  BOOST_CHECK(v1.empty());
 
   const vstd::string_view v2{"Hallo Welt"};
-  EXPECT_EQ(v2.size(), 10);
-  EXPECT_EQ(v2.empty(), false);
+  BOOST_CHECK(v2.size() == 10);
+  BOOST_CHECK(!v2.empty());
 
   const vstd::string_view v3{v2};
-  EXPECT_EQ(v3.size(), v2.size());
-  EXPECT_EQ(v3.data(), v2.data());
+  BOOST_CHECK(v3.size() == v2.size());
+  BOOST_CHECK(v3.data() == v2.data());
   const vstd::string_view v4{v1};
-  EXPECT_EQ(v4.size(), v1.size());
-  EXPECT_EQ(v4.data(), v1.data());
+  BOOST_CHECK(v4.size() == v1.size());
+  BOOST_CHECK(v4.data() == v1.data());
 
   const vstd::string s1{"Hallo Welt"};
   const vstd::string_view v5{s1};
-  EXPECT_EQ(v5.size(), s1.size());
-  EXPECT_EQ(v5.data(), s1.data());
+  BOOST_CHECK(v5.size() == s1.size());
+  BOOST_CHECK(v5.data() == s1.data());
 }
 
 // Test hash equivalence between string and string_view
-TEST(StringView, Hash)
+BOOST_AUTO_TEST_CASE(hash_equivalence)
 {
   const vstd::string_view v1{"Hallo Welt"};
   const vstd::string s1{"Hallo Welt"};
 
-  EXPECT_EQ(std::hash<vstd::string_view>()(v1), std::hash<vstd::string>()(s1));
+  BOOST_CHECK(std::hash<vstd::string_view>()(v1) ==
+              std::hash<vstd::string>()(s1));
 
   const vstd::wstring_view v2{L"Hallo Welt"};
   const vstd::wstring s2{L"Hallo Welt"};
 
-  EXPECT_EQ(std::hash<vstd::wstring_view>()(v2),
-            std::hash<vstd::wstring>()(s2));
+  BOOST_CHECK(std::hash<vstd::wstring_view>()(v2) ==
+              std::hash<vstd::wstring>()(s2));
 }
 
-VSTL_NS_END
+BOOST_AUTO_TEST_SUITE_END()

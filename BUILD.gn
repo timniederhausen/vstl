@@ -26,12 +26,12 @@ executable("vstl_unittests") {
   testonly = true
 
   sources = [
+    "test/main.cpp",
     "test/string_view.cpp",
   ]
 
   deps = [
     ":vstl",
-    "$external/googletest",
-    "$external/googletest/googletest:googletest_main",
+    "$external/boost/libs/test:unit_test_framework",
   ]
 }
