@@ -1,5 +1,5 @@
 /// @file
-/// Defines the string types
+/// Forward declares the string types.
 ///
 /// @copyright Copyright (c) 2015 Tim Niederhausen (tim@rnc-ag.de)
 /// Distributed under the Boost Software License, Version 1.0.
@@ -17,20 +17,19 @@
 
 #include <boost/container/container_fwd.hpp>
 
-VSTL_NS_BEGIN
+namespace boost {
+namespace container {
+namespace pmr {
 
-namespace boost
-{
-namespace container
-{
-namespace pmr
-{
 typedef boost::container::
     basic_string<char, std::char_traits<char>, polymorphic_allocator<char>>
         string;
+
 }
 }
 }
+
+VSTL_NS_BEGIN
 
 using boost::container::pmr::string;
 

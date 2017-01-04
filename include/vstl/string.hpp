@@ -17,10 +17,9 @@
 
 #include <boost/container/pmr/string.hpp>
 
-namespace boost
-{
-namespace container
-{
+namespace boost {
+namespace container {
+
 extern template class boost::container::basic_string<
     char,
     std::char_traits<char>,
@@ -30,6 +29,7 @@ extern template class boost::container::basic_string<
     wchar_t,
     std::char_traits<wchar_t>,
     boost::container::pmr::polymorphic_allocator<wchar_t>>;
+
 }
 }
 
@@ -46,8 +46,8 @@ inline void assign(vstd::string& dst, const std::string& src)
 
 VSTL_NS_END
 
-namespace std
-{
+namespace std {
+
 template <class T, class Traits>
 struct hash<vstd::basic_string<T, Traits>>
 {
@@ -56,6 +56,7 @@ struct hash<vstd::basic_string<T, Traits>>
     return boost::hash_range(s.begin(), s.end());
   }
 };
+
 }
 
 #endif

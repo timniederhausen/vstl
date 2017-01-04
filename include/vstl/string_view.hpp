@@ -775,8 +775,8 @@ inline void assign(wstring& dst, const wstring_view& src)
 
 VSTL_NS_END
 
-namespace std
-{
+namespace std {
+
 template <class T, class Traits>
 struct hash<vstd::basic_string_view<T, Traits>>
 {
@@ -785,6 +785,7 @@ struct hash<vstd::basic_string_view<T, Traits>>
     return boost::hash_range(s.begin(), s.end());
   }
 };
+
 }
 
 #endif
