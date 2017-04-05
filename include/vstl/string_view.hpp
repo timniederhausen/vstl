@@ -22,6 +22,7 @@
 VSTL_NS_BEGIN
 
 /// Mostly-conforming implementation of std::basic_string_view
+/// @todo constexpr versions of functions using char_traits
 template <class T, class Traits = std::char_traits<T>>
 class basic_string_view
 {
@@ -139,27 +140,19 @@ public:
 
   BOOST_CONSTEXPR const_reference at(size_type pos) const
   {
-    if (pos >= size_)
-      BOOST_THROW_EXCEPTION(std::out_of_range("vstd::basic_string_view::at"));
-
-    return data_[pos];
+    return pos < size_ ? data_[pos] :
+      (BOOST_THROW_EXCEPTION(std::out_of_range("vstd::basic_string_view::at")), data_[0]);
   }
 
   BOOST_CONSTEXPR const_reference front() const
   {
-    if (size_ == 0)
-      BOOST_THROW_EXCEPTION(
-          std::out_of_range("vstd::basic_string_view::front: empty"));
-
+    // TODO(tim): assert
     return data_[0];
   }
 
   BOOST_CONSTEXPR const_reference back() const
   {
-    if (size_ == 0)
-      BOOST_THROW_EXCEPTION(
-          std::out_of_range("vstd::basic_string_view::back: empty"));
-
+    // TODO(tim): assert
     return data_[size_ - 1];
   }
 
@@ -209,11 +202,11 @@ public:
   BOOST_CONSTEXPR basic_string_view substr(size_type pos = 0,
                                            size_type n = npos) const
   {
-    if (pos > size_)
-      BOOST_THROW_EXCEPTION(
-          std::out_of_range("vstd::basic_string_view::substr"));
-
-    return basic_string_view(data_ + pos, std::min(n, size_ - pos));
+    return pos <= size_ ?
+      basic_string_view(data_ + pos, std::min(n, size_ - pos)) :
+      (BOOST_THROW_EXCEPTION(
+          std::out_of_range("vstd::basic_string_view::substr")),
+       basic_string_view());
   }
 
   int compare(const basic_string_view& s) const BOOST_NOEXCEPT
