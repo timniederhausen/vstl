@@ -15,20 +15,20 @@
 #pragma once
 #endif
 
-#include <boost/container/pmr/vector.hpp>
+#include <boost/container/vector.hpp>
 
 VSTL_NS_BEGIN
 
-using boost::container::pmr::vector;
+using boost::container::vector;
 
-template <typename T, typename Predicate>
-inline void erase_if(vector<T>& c, Predicate p)
+template <typename T, class Allocator, typename Predicate>
+inline void erase_if(vector<T, Allocator>& c, Predicate p)
 {
   c.erase(std::remove_if(c.begin(), c.end(), p), c.end());
 }
 
-template <typename T, typename U>
-inline void erase(vector<T>& c, const U& v)
+template <typename T, class Allocator, typename U>
+inline void erase(vector<T, Allocator>& c, const U& v)
 {
   c.erase(std::remove(c.begin(), c.end(), v), c.end());
 }

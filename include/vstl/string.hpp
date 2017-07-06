@@ -15,7 +15,7 @@
 #pragma once
 #endif
 
-#include <boost/container/pmr/string.hpp>
+#include <boost/container/string.hpp>
 
 namespace boost {
 namespace container {
@@ -23,21 +23,21 @@ namespace container {
 extern template class boost::container::basic_string<
     char,
     std::char_traits<char>,
-    boost::container::pmr::polymorphic_allocator<char>>;
+    boost::container::new_allocator<char>>;
 
 extern template class boost::container::basic_string<
     wchar_t,
     std::char_traits<wchar_t>,
-    boost::container::pmr::polymorphic_allocator<wchar_t>>;
+    boost::container::new_allocator<wchar_t>>;
 
 }
 }
 
 VSTL_NS_BEGIN
 
-using boost::container::pmr::basic_string;
-using boost::container::pmr::string;
-using boost::container::pmr::wstring;
+using boost::container::basic_string;
+using boost::container::string;
+using boost::container::wstring;
 
 inline void assign(vstd::string& dst, const std::string& src)
 {

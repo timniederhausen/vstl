@@ -17,21 +17,11 @@
 
 #include <boost/container/container_fwd.hpp>
 
-namespace boost {
-namespace container {
-namespace pmr {
-
-typedef boost::container::
-    basic_string<char, std::char_traits<char>, polymorphic_allocator<char>>
-        string;
-
-}
-}
-}
-
 VSTL_NS_BEGIN
 
-using boost::container::pmr::string;
+using boost::container::basic_string;
+using boost::container::string;
+using boost::container::wstring;
 
 VSTL_NS_END
 

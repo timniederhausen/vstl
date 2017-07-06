@@ -62,6 +62,13 @@ public:
     // ctor
   }
 
+  basic_string_view(const std::basic_string<T, Traits>& str)
+    : data_(str.data())
+    , size_(str.size())
+  {
+    // ctor
+  }
+
   BOOST_CONSTEXPR basic_string_view(const T* str)
     : data_(str)
     , size_(traits_type::length(str))
@@ -754,6 +761,16 @@ template <class T, class Traits>
 inline std::size_t hash_value(const vstd::basic_string_view<T, Traits>& s)
 {
   return boost::hash_range(s.begin(), s.end());
+}
+
+inline std::string to_std_string(const string_view& src)
+{
+  return {src.data(), src.size()};
+}
+
+inline void assign(std::string& dst, const string_view& src)
+{
+  dst.assign(src.data(), src.size());
 }
 
 inline void assign(string& dst, const string_view& src)
