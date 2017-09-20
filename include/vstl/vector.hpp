@@ -15,11 +15,11 @@
 #pragma once
 #endif
 
-#include <boost/container/vector.hpp>
+#include <vector>
 
 VSTL_NS_BEGIN
 
-using boost::container::vector;
+using std::vector;
 
 template <typename T, class Allocator, typename Predicate>
 inline void erase_if(vector<T, Allocator>& c, Predicate p)
